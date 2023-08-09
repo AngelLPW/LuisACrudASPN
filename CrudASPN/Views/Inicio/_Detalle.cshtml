@@ -1,0 +1,99 @@
+﻿@model CrudASPN.Models.Contacto
+@{
+    Layout = null;
+
+    ViewData["Title"] = "Detalle de contacto";
+}
+
+
+<div class="row">
+    <div class="offser-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>DETALLE CONTACTOS</strong> </h3>
+
+
+            </div>
+            <div class="card-body">
+
+                <ul>
+                    <li class=" list-group-item"><strong>Nombre: </strong>@Html.DisplayFor(m=> m.Nombre) </li>
+                    <li class=" list-group-item"><strong>Telefono: </strong>@Html.DisplayFor(m=> m.Telefono) </li>
+                    <li class=" list-group-item"><strong>Celular: </strong>@Html.DisplayFor(m=> m.Celular) </li>
+                    <li class=" list-group-item"><strong>Email: </strong>@Html.DisplayFor(m=> m.Email) </li>
+                    <li class=" list-group-item"><strong>Fecha creación: </strong>@Html.DisplayFor(m=> m.FechaCreacion) </li>
+                </ul>
+                <ul>
+                    <li><a class="btn btn-outline-danger" asp-action="Borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-eraser-fill"></i> Borrar</a></li>
+                    <li><a class="btn btn-outline-warning" asp-action="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-fill"></i> Editar</a></li>
+                </ul>
+
+
+
+
+                <a asp-controller="Inicio" asp-action="Index"><i class="bi bi-chevron-double-left"></i>Regresar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form asp-action="Editar">
+                    @*ID de l Usuairo de manera*@
+                    <input type="hidden" asp-for="ID" />
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <div class=" form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control border border-success" placeholder="Ingresa el nombre" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control border border-success" placeholder="Ingresa el numero telefonico" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Celular" class="control-label"></label>
+                        <input asp-for="Celular" class="form-control  border border-success" placeholder="Ingresa el numero de ceular" />
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control border border-success" placeholder="Ingresa el Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-outline-primary d-block mx-auto"><i class="bi bi-Pencil-fill"></i> Editar Usuario</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

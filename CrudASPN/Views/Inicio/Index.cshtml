@@ -1,0 +1,138 @@
+﻿@model IEnumerable<CrudASPN.Models.Contacto>
+@{
+    ViewData["Title"] = "Lista de contacto";
+}
+
+<h1 class="text-center">Contactos en INA Upala ASP.Net Core</h1>
+<div class="row">
+    <div class="offser-9 col-3 mb-3">
+        <a asp-action="crear" asp-controller="Inicio" class="btn btn-outline-secondary d-block mx-auto btn-lg ">
+            <i class="bi bi-file-plus-fill"></i>
+            NUEVO USUARIO
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="offser-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>LISTA DE USUARIOS</strong> </h3>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table-bordered" id="tblUsuarios" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(m=> m.ID)</th>
+                                    <th>@Html.DisplayNameFor(m=> m.Nombre)</th>
+                                    <th>@Html.DisplayNameFor(m=> m.Telefono)</th>
+                                    <th>@Html.DisplayNameFor(m=> m.Celular)</th>
+                                    <th>@Html.DisplayNameFor(m=> m.Email)</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(m=> item.ID)</td>
+                                        <td>@Html.DisplayFor(m=> item.Nombre)</td>
+                                        <td>@Html.DisplayFor(m=> item.Telefono)</td>
+                                        <td>@Html.DisplayFor(m=> item.Celular)</td>
+                                        <td>@Html.DisplayFor(m=> item.Email)</td>
+                                        <td>
+                                            <a onclick="showPartial(this)" class="btn btn-outline-danger" data-url="/Inicio/Borrar" data-id="@item.ID"><i class="bi bi-eraser-fill"></i> Borrar</a>
+                                            <a onclick="showPartial(this)" class="btn btn-outline-danger" data-url="/Inicio/Editar" data-id="@item.ID"><i class="bi bi-pencil-fill"></i> Editar</a>
+                                            <button onclick="showPartial(this)" class="btn btn-outline-secondary open-modal" data-url="/Inicio/_Detalle" data-id="@item.ID"><i class="bi bi-info-circle-fill"></i> Detalles</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay reguistros</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tblUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+
+    </script>
+    }
+    
+<!-- Modal -->
+<div class="modal fade" id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="Mcontainer">
+      
+        </div>
+           
+    </div>
+</div>
+<script>
+    //Obtenemos la direccion del controlador que realiza la accion y el ID del modelo a tratar
+    function showPartial(triggerElement){
+        var url = $(triggerElement).data("url");
+        var id= $(triggerElement).data("id");
+        // concatenar elID en la url
+                url += "?id=" + id;
+
+        //realizamos una peticion get al constructor inciado en la ruta que se obtuvo del triggerElement
+        // Function (data) En jquery, las funciones de callback son funciones que se pasan como argumento a metodos
+        //se ejecuatan en ciertos eventos o cunado se completa una accion
+        $.get(url,function(data){
+            //La respuesta de la peticion get es con codigo html una vista
+            $("#Mcontainer").html(data);//Aplicamos la rspuesta
+            $("#MyModal").modal("show");//Mosdtranos el modal
+        })
+    }
+
+</script>

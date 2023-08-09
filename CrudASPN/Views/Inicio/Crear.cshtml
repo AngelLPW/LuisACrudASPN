@@ -1,0 +1,54 @@
+﻿@model CrudASPN.Models.Contacto
+@{
+    ViewData["Title"] = "Lista de contacto";
+}
+
+<h1 class="text-center">Contactos en INA Upala ASP.Net Core</h1>
+
+<div class="row">
+    <div class="offser-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>CREAR CONTACTOS</strong> </h3>
+
+
+            </div>
+            <div class="card-body">
+                <form asp-action="Crear" method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <div class=" form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control border border-success" placeholder="Ingresa el nombre" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control border border-success" placeholder="Ingresa el numero telefonico" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Celular" class="control-label"></label>
+                        <input asp-for="Celular" class="form-control  border border-success" placeholder="Ingresa el numero de ceular" />
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control border border-success" placeholder="Ingresa el Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-outline-secondary d-block mx-auto"><i class="bi bi-person-fill"></i> Crear Usuario</button>
+                    </div>
+                </form>
+                <a asp-controller="Inicio" asp-action="Index"><i class="bi bi-chevron-double-left"></i>Regresar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
